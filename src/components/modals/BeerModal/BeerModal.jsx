@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import ModalDisplay from '../ModalDisplay/ModalDisplay';
 import ModalContainer from '../ModalContainer/ModalContainer';
 import './BeerModal.scss';
-import { getAllBeers, getBeerById } from '../../../services/beersService';
+import { getBeerById } from '../../../services/beersService';
 import Loader from '../../Loader/Loader';
 import useComponentVisible from '../../../hooks/useComponentVisible';
 import { closeAllModals } from '../../../redux/actions/display/displayModal.action';
