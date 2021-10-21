@@ -15,7 +15,7 @@ export default function BeerModal() {
   const displayBeerModal = useSelector((state) => state.display.beerModal);
   const [loadingState, setLoadingState] = useState(false);
   const [beer, setBeer] = useState({});
-  console.log(beer);
+
   useEffect(() => {
     if (displayBeerModal) {
       setIsComponentVisible(true);
@@ -49,10 +49,10 @@ export default function BeerModal() {
     <ModalDisplay>
       <div className="beer-modal z-depth-3" ref={ref}>
         <ModalContainer>
-          <p>coucou</p>
+
           {loadingState ? <Loader />
             : (
-              <div>lol</div>
+                  <p>{beer.name}</p>
             ) }
 
         </ModalContainer>

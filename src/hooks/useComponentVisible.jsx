@@ -12,7 +12,6 @@ export default function useComponentVisible(
       && ref.current
       && !ref.current.contains(event.target)
     ) {
-      console.log('hihi');
       setIsComponentVisible(false);
     }
   };
