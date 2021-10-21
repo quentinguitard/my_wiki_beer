@@ -66,7 +66,7 @@ export default function BeerModal() {
         </div>
         <div className="additional-info">
           <p className="label">Food pairing :</p>
-          {beer.food_pairing.map((v) => <p className="text">{v}</p>)}
+          {beer.food_pairing?.map((v) => <p className="text">{v}</p>)}
         </div>
       </div>
 
