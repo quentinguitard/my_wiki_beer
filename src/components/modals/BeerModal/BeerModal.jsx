@@ -52,7 +52,7 @@ export default function BeerModal() {
 
           {loadingState ? <Loader />
             : (
-                  <p>{beer.name}</p>
+              <p>{beer.name}</p>
             ) }
 
         </ModalContainer>
