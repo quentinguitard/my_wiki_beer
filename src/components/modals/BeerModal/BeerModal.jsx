@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ModalDisplay from '../ModalDisplay/ModalDisplay';
 import ModalContainer from '../ModalContainer/ModalContainer';
-import './BeerModal.scss';
 import { getBeerById } from '../../../services/beersService';
 import Loader from '../../Loader/Loader';
 import useComponentVisible from '../../../hooks/useComponentVisible';
 import { closeAllModals } from '../../../redux/actions/display/displayModal.action';
+import './BeerModal.scss';
 
 export default function BeerModal() {
   const dispatch = useDispatch();
@@ -45,16 +45,40 @@ export default function BeerModal() {
     fetchBeer();
   }, [beerId]);
 
+  const beerDisplay = (
+    <div className="beer-display">
+      <div className="main-information">
+        <img src={beer.image_url} alt="" className="beer-image" />
+        <div className="beer-info">
+          <h3 className="beer-title">
+            {beer.name}
+          </h3>
+          <p className="beer-author">{beer.contributed_by}</p>
+          <p className="beer-description">
+            {beer.description}
+          </p>
+        </div>
+      </div>
+      <div className="more-beer-info">
+        <div className="additional-info">
+          <p className="label">Useful Tips :</p>
+          <p className="text">{beer.brewers_tips}</p>
+        </div>
+        <div className="additional-info">
+          <p className="label">Food pairing :</p>
+          {beer.food_pairing.map((v) => <p className="text">{v}</p>)}
+        </div>
+      </div>
+
+    </div>
+  );
+
   return (
     <ModalDisplay>
       <div className="beer-modal z-depth-3" ref={ref}>
         <ModalContainer>
-
           {loadingState ? <Loader />
-            : (
-              <p>{beer.name}</p>
-            ) }
-
+            : beerDisplay }
         </ModalContainer>
       </div>
     </ModalDisplay>
