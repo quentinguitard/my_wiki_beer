@@ -1,0 +1,9 @@
+@import "../../assets/css/variables";
+
+.beer {
+  cursor: pointer;
+}
+
+.beer:hover {
+  background-color: $beer-color-1;
+}

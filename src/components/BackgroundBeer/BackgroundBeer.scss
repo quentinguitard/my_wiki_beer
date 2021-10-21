@@ -1,0 +1,32 @@
+@import "../../assets/css/variables";
+
+.background-beer {
+  position: absolute;
+  background-color: $beer-color-2;
+  z-index: -10;
+  height: 100vh;
+  width: 100vw;
+
+  .beer-fill {
+    background-color: white;
+    border-radius: 0 0 70% 70% / 50px;
+    border: 1px #C96E12;
+    transition: height 1s ease-out;
+  }
+
+  .size-5 {
+    height: 95%;
+  }
+  .size-4 {
+    height: 75%;
+  }
+  .size-3 {
+    height: 55%;
+  }
+  .size-2 {
+    height: 40%;
+  }
+  .size-1 {
+    height: 20%;
+  }
+}

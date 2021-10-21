@@ -1,0 +1,29 @@
+@import "../../assets/css/variables";
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+
+  ul {
+    li {
+      cursor: pointer;
+      padding: 0 2px;
+      margin: 0 $spacing-xxs;
+      -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+      -khtml-user-select: none; /* Konqueror HTML */
+      -moz-user-select: none; /* Old versions of Firefox */
+      -ms-user-select: none; /* Internet Explorer/Edge */
+      user-select: none;
+
+      @media (min-width: 600px) {
+        margin: 0 $spacing-s;
+        padding: 0 $spacing-xxs;
+      }
+    }
+
+    li.active {
+      background-color: $beer-color-3;
+    }
+  }
+}

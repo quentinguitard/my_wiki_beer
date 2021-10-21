@@ -1,0 +1,14 @@
+@import "../../assets/css/variables";
+
+.beers-table {
+  text-align: center;
+  min-height: 300px;
+  border: 1px solid rgba(0,0,0,0.12);
+  border-radius: $spacing-xxs;
+  padding: $spacing-l $spacing-l $spacing-xs $spacing-l;
+  background-color: white;
+}
+
+table.highlight>tbody>tr:hover {
+  background-color: rgba(255, 248, 151, 0.2)  !important;
+}
