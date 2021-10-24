@@ -7,6 +7,7 @@ import Loader from '../../Loader/Loader';
 import useComponentVisible from '../../../hooks/useComponentVisible';
 import { closeAllModals } from '../../../redux/actions/display/displayModal.action';
 import './BeerModal.scss';
+import CloseModalButton from '../CloseModalButton/CloseModalButton';
 
 export default function BeerModal() {
   const dispatch = useDispatch();
@@ -45,6 +46,15 @@ export default function BeerModal() {
     fetchBeer();
   }, [beerId]);
 
+  const NumbersDisplay = ({ label, value }) => (
+    <p className="label">
+      {label}
+      <span className="color-dark">
+        {value}
+      </span>
+    </p>
+  );
+
   const beerDisplay = (
     <div className="beer-display">
       <div className="main-information">
@@ -59,6 +69,12 @@ export default function BeerModal() {
           </p>
         </div>
       </div>
+      <div className="numbers-info">
+        <NumbersDisplay value={`${beer.abv}%`} label="Vol. :" />
+        <NumbersDisplay value={beer.ibu} label="IBU :" />
+        <NumbersDisplay value={beer.ph} label="Ph. :" />
+        <NumbersDisplay value={beer.ebc} label="EBC :" />
+      </div>
       <div className="more-beer-info">
         <div className="additional-info">
           <p className="label">Useful Tips :</p>
@@ -66,15 +82,15 @@ export default function BeerModal() {
         </div>
         <div className="additional-info">
           <p className="label">Food pairing :</p>
-          {beer.food_pairing?.map((v) => <p className="text">{v}</p>)}
+          {beer.food_pairing?.map((v) => <p key={v} className="text">{v}</p>)}
         </div>
       </div>
-
     </div>
   );
 
   return (
     <ModalDisplay>
+      <CloseModalButton action={() => { dispatch(closeAllModals()); }} />
       <div className="beer-modal z-depth-3" ref={ref}>
         <ModalContainer>
           {loadingState ? <Loader />

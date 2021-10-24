@@ -6,10 +6,12 @@ import Pagination from '../Pagination/Pagination';
 import './BeersTable.scss';
 import Loader from '../Loader/Loader';
 import storePageNumber from '../../redux/actions/display/pageNumber.action';
+import { sortBeersAsc, sortBeersDesc } from '../../services/sortBeersArray';
 
 export default function BeersTable() {
   const dispatch = useDispatch();
   const [beers, setBeers] = useState([]);
+  const [sortBeers, setSortBeers] = useState({ param: '', asc: true, desc: false });
   const [pageNumber, setPageNumber] = useState(1);
   const [loadingState, setLoadingState] = useState(false);
   const itemPerPage = 5;
@@ -37,6 +39,30 @@ export default function BeersTable() {
     dispatch(storePageNumber(pageNumber));
   }, [pageNumber]);
 
+  const SortArrow = ({ asc, desc }) => (
+    <>
+      {asc && <i className="fas fa-chevron-up" />}
+      {desc && <i className="fas fa-chevron-down" />}
+    </>
+  );
+
+  const setStateSort = (selectedParam) => {
+    setPageNumber(1);
+    setSortBeers(((prevState) => {
+      if (prevState.param !== selectedParam) {
+        setBeers((prevBeersState) => sortBeersAsc(prevBeersState, selectedParam));
+        return { param: selectedParam, asc: true, desc: false };
+      } if (prevState.asc) {
+        setBeers((prevBeersState) => sortBeersDesc(prevBeersState, selectedParam));
+        return { ...prevState, asc: false, desc: true };
+      } if (prevState.desc) {
+        setBeers((prevBeersState) => sortBeersAsc(prevBeersState, selectedParam));
+        return { ...prevState, asc: true, desc: false };
+      }
+      return { ...prevState };
+    }));
+  };
+
   const onPageChange = (page) => {
     setPageNumber(page.selected + 1);
   };
@@ -48,7 +74,7 @@ export default function BeersTable() {
       name={beer.name}
       abv={beer.abv}
       ibu={beer.ibu}
-      firstBrewed={beer.first_brewed}
+      ebc={beer.ebc}
     />
   ));
 
@@ -57,10 +83,22 @@ export default function BeersTable() {
       <table className="highlight">
         <thead>
           <tr>
-            <th>Beer Name</th>
-            <th>Alcohol by volume</th>
-            <th>IBU</th>
-            <th>Creation date</th>
+            <th onClick={() => setStateSort('name')}>
+              Beer Name
+              {sortBeers.param === 'name' && <SortArrow asc={sortBeers.asc} desc={sortBeers.desc} /> }
+            </th>
+            <th onClick={() => setStateSort('abv')}>
+              Alcohol by volume
+              {sortBeers.param === 'abv' && <SortArrow asc={sortBeers.asc} desc={sortBeers.desc} /> }
+            </th>
+            <th onClick={() => setStateSort('ibu')}>
+              IBU
+              {sortBeers.param === 'ibu' && <SortArrow asc={sortBeers.asc} desc={sortBeers.desc} /> }
+            </th>
+            <th onClick={() => setStateSort('ebc')}>
+              EBC
+              {sortBeers.param === 'ebc' && <SortArrow asc={sortBeers.asc} desc={sortBeers.desc} /> }
+            </th>
           </tr>
         </thead>
 
@@ -69,7 +107,11 @@ export default function BeersTable() {
         </tbody>
       </table>
 
-      <Pagination pageCount={totalPages} actionOnPageChange={onPageChange} />
+      <Pagination
+        pageCount={totalPages}
+        actionOnPageChange={onPageChange}
+        pageNumber={pageNumber - 1}
+      />
     </div>
   );
 

@@ -5,6 +5,7 @@ import ReactPaginate from 'react-paginate';
 export default function Pagination({
   pageCount,
   actionOnPageChange,
+  pageNumber,
 }) {
   return (
     <div className="pagination-container">
@@ -19,6 +20,7 @@ export default function Pagination({
         containerClassName="pagination"
         activeClassName="active"
         onPageChange={actionOnPageChange}
+        forcePage={pageNumber}
       />
     </div>
   );

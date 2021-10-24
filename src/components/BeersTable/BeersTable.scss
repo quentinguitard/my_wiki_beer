@@ -7,6 +7,14 @@
   border-radius: $spacing-xxs;
   padding: $spacing-l $spacing-l $spacing-xs $spacing-l;
   background-color: white;
+
+  th {
+    cursor: pointer;
+
+    i {
+      margin-left: $spacing-xxs;
+    }
+  }
 }
 
 table.highlight>tbody>tr:hover {

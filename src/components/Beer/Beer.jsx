@@ -7,7 +7,7 @@ export default function Beer({
   name,
   abv,
   ibu,
-  firstBrewed,
+  ebc,
   id,
 }) {
   const dispatch = useDispatch();
@@ -16,7 +16,7 @@ export default function Beer({
       <td>{name}</td>
       <td>{`${abv}%`}</td>
       <td>{ibu}</td>
-      <td>{firstBrewed}</td>
+      <td>{ebc}</td>
     </tr>
   );
 }
