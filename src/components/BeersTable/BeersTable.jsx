@@ -26,7 +26,8 @@ export default function BeersTable() {
       setLoadingState(true);
 
       const timer = setTimeout(async () => {
-        setBeers(await getAllBeers());
+        setBeers(sortBeersAsc((await getAllBeers()), 'name'));
+        setSortBeers({ param: 'name', asc: true, desc: false });
         setLoadingState(false);
       }, 1000);
       return () => clearTimeout(timer);
@@ -92,11 +93,11 @@ export default function BeersTable() {
               {sortBeers.param === 'abv' && <SortArrow asc={sortBeers.asc} desc={sortBeers.desc} /> }
             </th>
             <th onClick={() => setStateSort('ibu')}>
-              IBU
+              Int. Bitterness Unit
               {sortBeers.param === 'ibu' && <SortArrow asc={sortBeers.asc} desc={sortBeers.desc} /> }
             </th>
             <th onClick={() => setStateSort('ebc')}>
-              EBC
+              Eu. Brewery Convention
               {sortBeers.param === 'ebc' && <SortArrow asc={sortBeers.asc} desc={sortBeers.desc} /> }
             </th>
           </tr>

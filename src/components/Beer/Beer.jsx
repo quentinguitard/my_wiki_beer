@@ -15,8 +15,9 @@ export default function Beer({
     <tr className="beer" onClick={() => dispatch(displayBeerModal(id))}>
       <td>{name}</td>
       <td>{`${abv}%`}</td>
-      <td>{ibu}</td>
-      <td>{ebc}</td>
+      <td>{ibu || '-'}</td>
+      <td>{ebc || '-'}</td>
     </tr>
+
   );
 }
